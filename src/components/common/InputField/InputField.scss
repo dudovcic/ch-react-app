@@ -1,0 +1,8 @@
+@import '../../../style/_mixin.scss';
+
+.InputField {
+  @include flexbox;
+  @include flex(1);
+  @include justify-content(center);
+  @include align-items(center);
+}

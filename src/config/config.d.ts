@@ -1,0 +1,3 @@
+interface ClientConfig {
+  apiBaseUrl: string;
+}
