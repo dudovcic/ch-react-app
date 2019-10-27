@@ -5,4 +5,15 @@
   @include flex(1);
   @include justify-content(center);
   @include align-items(center);
+  min-width: 300px;
+  margin: 50px 0;
+
+  .Input {
+    @include flexbox;
+    @include flex(1);
+    padding: 10px;
+    text-align: center;
+    border: 2px solid orange;
+    border-radius: 10px;
+  }
 }

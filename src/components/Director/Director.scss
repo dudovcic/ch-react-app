@@ -1,0 +1,6 @@
+@import '../../style/_shared.scss';
+
+.Director {
+    @include flexbox;
+    @include justify-content(flex-start);
+}

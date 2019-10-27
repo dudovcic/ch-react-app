@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
+import './InputField.scss';
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   value?: string;
   disabled?: boolean;
-  onChange(text: string): void;
+  onTextChange(text: string): void;
 }
 
 export default (props: Props) => {
+  const { onTextChange, value, ...rest } = props;
   return (
     <div className="InputField">
       <input
         className="Input"
-        value={props.value}
-        onChange={e => props.onChange(e.target.value)}
+        value={value}
+        onChange={e => props.onTextChange(e.target.value)}
+        {...rest}
       />
     </div>
   );

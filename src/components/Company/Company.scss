@@ -1,0 +1,13 @@
+@import '../../style/_shared.scss';
+
+.Company {
+  p {
+    font-size: $font-medium;
+  }
+  .active {
+    color: green;
+  }
+  .inactive {
+    color: red;
+  }
+}

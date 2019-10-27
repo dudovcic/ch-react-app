@@ -9,13 +9,11 @@ export interface ContainerProps {
   api: Api;
 }
 
-const container = <K extends ContainerKeyToInject>(...providedKeys: K[]) => (
+const container: any = <K extends ContainerKeyToInject>(
+  ...providedKeys: K[]
+) => (
   // fn - Class or functional component
-  fn:
-    | React.ComponentType<Pick<ContainerProps, K>>
-    | ((
-        props: Pick<ContainerProps, K>
-      ) => React.ComponentType<any> | JSX.Element)
+  fn: (props: Pick<ContainerProps, K>) => React.ComponentType<any> | JSX.Element
 ): React.ComponentType<{}> =>
   inject(...(providedKeys as string[]))(observer<any>(fn));
 

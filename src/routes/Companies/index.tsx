@@ -2,37 +2,38 @@ import React from 'react';
 import { container } from '../../state';
 import { ContainerProps } from '../../state/index';
 import Company from '../../components/Company';
+import { observer } from 'mobx-react';
 
 interface Props extends Pick<ContainerProps, 'state' | 'api'> {
-  companies?: company.Company[];
+  companies: company.Company[];
 }
 
-interface State {
-  info?: company.Company[];
-  error: any;
-}
-
-class Companies extends React.Component<Props, State> {
-  state: State = {
-    info: undefined,
-    error: ''
-  };
-  componentDidMount() {
-    this.props.api
-      .searchCompanies('ltd')
-      .then(i => {
-        console.log(i);
-        this.setState({ info: i.items });
-      })
-      .catch(e => this.setState({ error: e }));
-    console.log(this.props.state.token);
-  }
+@observer
+class Companies extends React.Component<Props> {
   render() {
-    const companies = this.state.info;
+    const { companies = [] } = this.props;
     return (
-      <div>{companies && companies.map(c => <Company company={c} />)}</div>
+      <div>
+        {companies &&
+          companies.map(c => (
+            <Company
+              key={c.company_number}
+              company={c}
+              directors={this.props.state.getDirectors(c.company_number)}
+              onExpand={() => this.onExpand(c.company_number)}
+            />
+          ))}
+      </div>
     );
   }
+
+  private onExpand = async (cn: string) => {
+    const directors = this.props.state.getDirectors(cn);
+    if (!directors) {
+      const d = await this.props.api.searchDirectors(cn);
+      this.props.state.setDirectors(cn, d.items);
+    }
+  };
 }
 
-export default container('state', 'api')(Companies);
+export default container('api', 'state')(Companies);
