@@ -19,6 +19,7 @@ export default class Api extends HttpClient {
     this.setAuthorizationToken(token!);
   };
 
+  // TODO: pagination
   public searchCompanies = (
     query: string
   ): Promise<company.SearchResult<company.Company>> =>
