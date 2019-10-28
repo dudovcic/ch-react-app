@@ -34,10 +34,11 @@ export default (props: Props) => {
           <p>{props.company.title}</p>
         </ExpansionPanelSummary>
         <Chip
+          className="uppercase"
           color={
             props.company.company_status === 'active' ? 'primary' : 'secondary'
           }
-          label={props.company.company_status.toUpperCase()}
+          label={props.company.company_status}
         />
         {/* TODO: utilize this */}
         {[

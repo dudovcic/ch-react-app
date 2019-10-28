@@ -1,10 +1,10 @@
 declare module company {
   type CompanyStatus =
-    | active
-    | dissolved
-    | liquidation
-    | receivership
-    | administration
+    | 'active'
+    | 'dissolved'
+    | 'liquidation'
+    | 'receivership'
+    | 'administration'
     | 'voluntary-arrangement'
     | 'converted-closed '
     | 'insolvency-proceedings';
