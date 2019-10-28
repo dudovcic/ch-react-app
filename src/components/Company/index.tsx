@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import { ExpansionPanelSummary } from '@material-ui/core';
+import {
+  ExpansionPanelSummary,
+  ListItem,
+  ListItemText,
+  Chip
+} from '@material-ui/core';
 import Director from '../Director';
 import classnames from 'classnames';
 import './Company.scss';
@@ -17,7 +22,7 @@ export default (props: Props) => {
   const [directorFilter, setDirectorFilter] = useState<string>('');
 
   return (
-    <div className="Company">
+    <div className={classnames('Company', { expanded })}>
       <ExpansionPanel
         expanded={expanded}
         onChange={() => {
@@ -28,23 +33,26 @@ export default (props: Props) => {
         <ExpansionPanelSummary>
           <p>{props.company.title}</p>
         </ExpansionPanelSummary>
-        <p>
-          Status:
-          <p
-            style={{ display: 'inline' }}
-            className={classnames('uppercase', {
-              active: props.company.company_status === 'active',
-              inactive: props.company.company_status !== 'active'
-            })}
-          >
-            {` ${props.company.company_status}`}
-          </p>
-        </p>
-        <p>Company Number: {props.company.company_number}</p>
-        <p>Address: {props.company.address_snippet}</p>
-        <p>Directors</p>
+        <Chip
+          color={
+            props.company.company_status === 'active' ? 'primary' : 'secondary'
+          }
+          label={props.company.company_status.toUpperCase()}
+        />
+        {/* TODO: utilize this */}
+        {[
+          { label: 'Company Number', value: props.company.company_number },
+          { label: 'Address', value: props.company.address_snippet },
+          { label: 'Description', value: props.company.description }
+        ].map(i => (
+          <ListItem key={i.label}>
+            <ListItemText primary={i.label} secondary={i.value} />
+          </ListItem>
+        ))}
         <InputField
+          className="director-input"
           value={directorFilter}
+          label="Directors"
           onTextChange={t => setDirectorFilter(t)}
           placeholder="Search directors..."
         />

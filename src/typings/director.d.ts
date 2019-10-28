@@ -1,6 +1,6 @@
 declare module company {
   export interface Director {
-    nationality: string;
+    nationality?: string;
     name: string;
     name_elements: {
       title: string;

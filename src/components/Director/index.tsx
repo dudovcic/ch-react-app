@@ -1,5 +1,6 @@
 import React from 'react';
 import './Director.scss';
+import { ListItem, ListItemText } from '@material-ui/core';
 
 interface Props {
   director: company.Director;
@@ -8,9 +9,12 @@ interface Props {
 export default (props: Props) => {
   const { director } = props;
   return (
-    <div className="Director">
-      <p>Name: {director.name}</p>
-      <p>Nationality: {director.nationality}</p>
-    </div>
+    <ListItem className="Director">
+      <ListItemText className="name" primary="Name" secondary={director.name} />
+      <ListItemText
+        primary="Nationality"
+        secondary={director.nationality || 'Unavailable'}
+      />
+    </ListItem>
   );
 };

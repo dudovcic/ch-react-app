@@ -3,7 +3,7 @@ import './App.scss';
 import { Provider } from './state';
 import { State } from './state/state';
 import Api from './api/index';
-import Companies from './routes/Companies';
+import Companies from './containers/Companies';
 import InputField from './components/common/InputField';
 import { observer } from 'mobx-react';
 import Loading from './components/common/Loading';
@@ -40,11 +40,13 @@ class App extends React.Component<any, AppState> {
                 value={state.token}
                 onTextChange={api.setToken}
                 placeholder="Please enter your API key..."
+                label="API Key"
               />
               <InputField
                 value={this.state.query}
                 onTextChange={this.searchCompanies}
                 placeholder="Search for companies..."
+                label="Company name"
               />
             </div>
             {this.state.loading && <Loading />}

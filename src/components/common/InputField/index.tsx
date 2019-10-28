@@ -1,22 +1,19 @@
 import React, { InputHTMLAttributes } from 'react';
 import './InputField.scss';
+import { TextField } from '@material-ui/core';
+import { TextFieldProps } from '@material-ui/core/TextField';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  value?: string;
-  disabled?: boolean;
+type Props = TextFieldProps & {
   onTextChange(text: string): void;
-}
+};
 
 export default (props: Props) => {
-  const { onTextChange, value, ...rest } = props;
+  const { onTextChange, variant, ...rest } = props;
   return (
-    <div className="InputField">
-      <input
-        className="Input"
-        value={value}
-        onChange={e => props.onTextChange(e.target.value)}
-        {...rest}
-      />
-    </div>
+    <TextField
+      onChange={e => props.onTextChange(e.target.value)}
+      variant={variant || ('filled' as any)}
+      {...rest}
+    />
   );
 };

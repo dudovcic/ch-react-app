@@ -14,6 +14,7 @@ declare module company {
     date_of_creation: string;
     title: string;
     address_snippet: string;
+    description: string;
     company_number: string;
   }
 }
