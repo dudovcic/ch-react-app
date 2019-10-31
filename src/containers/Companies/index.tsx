@@ -1,27 +1,23 @@
 import React from 'react';
-import { container } from '../../state';
+import { container, containerDecorator } from '../../state';
 import { ContainerProps } from '../../state/index';
 import Company from '../../components/Company';
 
 interface Props extends Pick<ContainerProps, 'state' | 'api'> {
-  companies: company.Company[];
+  companies?: company.Company[];
 }
 
 class Companies extends React.Component<Props> {
   render() {
     const { companies = [] } = this.props;
-    return (
-      <div>
-        {companies.map(c => (
-          <Company
-            key={c.company_number}
-            company={c}
-            directors={this.props.state.getDirectors(c.company_number)}
-            onExpand={() => this.onExpand(c.company_number)}
-          />
-        ))}
-      </div>
-    );
+    return companies.map(c => (
+      <Company
+        key={c.company_number}
+        company={c}
+        directors={this.props.state.getDirectors(c.company_number)}
+        onExpand={() => this.onExpand(c.company_number)}
+      />
+    ));
   }
 
   private onExpand = async (cn: string) => {
@@ -33,4 +29,6 @@ class Companies extends React.Component<Props> {
   };
 }
 
-export default container('api', 'state')(Companies);
+export { Companies };
+
+export default containerDecorator('api', 'state')(Companies);

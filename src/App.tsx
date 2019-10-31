@@ -50,9 +50,11 @@ class App extends React.Component<any, AppState> {
               />
             </div>
             {this.state.loading && <Loading />}
-            {this.state.loading ? null : (
-              <Companies companies={state.companies} />
-            )}
+            <div>
+              {this.state.loading ? null : (
+                <Companies companies={state.companies} />
+              )}
+            </div>
           </header>
         </div>
       </Provider>
