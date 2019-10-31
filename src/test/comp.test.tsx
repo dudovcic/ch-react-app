@@ -18,6 +18,6 @@ it('renders correct number of companies', () => {
   const companies = shallow(
     <Companies api={api} state={state} companies={state.companies} />
   );
-  const renderedCompanies = companies.getElements();
+  const renderedCompanies = companies.find(Company);
   expect(renderedCompanies.length).toEqual(company1.length);
 });
